@@ -1,0 +1,44 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    },
+    "Timing": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/ClimbSubsystem": "Subsystem",
+      "/LiveWindow/DriveSubsystem": "Subsystem",
+      "/LiveWindow/FunnelSubsystem": "Subsystem",
+      "/LiveWindow/IntakeSubsystem": "Subsystem",
+      "/LiveWindow/PDPSubsystem": "Subsystem",
+      "/LiveWindow/ShooterSubsystem": "Subsystem",
+      "/LiveWindow/TurretSubsystem": "Subsystem",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/VisionSubsystem": "Subsystem"
+    },
+    "windows": {
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "open": true
+    }
+  },
+  "NetworkTables View": {
+    "visible": false
+  }
+}
