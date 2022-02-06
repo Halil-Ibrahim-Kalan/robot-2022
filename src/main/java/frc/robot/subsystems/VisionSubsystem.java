@@ -5,30 +5,37 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonPipelineResult;
 
 public class VisionSubsystem extends SubsystemBase {
   /** Creates a new VisionSubsystem. */
-  private double xEntry;
-  private double yEntry;
-  private final NetworkTableInstance inst;
-  private final NetworkTable table;
-
+  PhotonCamera camera;
+  PhotonPipelineResult result;
+  NetworkTableEntry yawResult;
+  NetworkTableInstance NTmain;
+  NetworkTable nt;
+  
   public VisionSubsystem() {
-    inst = NetworkTableInstance.getDefault();
-    table = inst.getTable("Vision");
+    camera = new PhotonCamera("borusancam");
+    NTmain = NetworkTableInstance.getDefault();
+    nt = NTmain.getTable("photonvision").getSubTable("borusancam");
   }
 
   public double getX(){
-    xEntry = table.getEntry("target_x").getDouble(Double.NaN);
-    return xEntry;
+    return nt.getEntry("targetYaw").getDouble(Double.NaN);
   }
 
   public double getY(){
-    yEntry = table.getEntry("target_y").getDouble(Double.NaN);
-    return yEntry;
+    return nt.getEntry("targetPitch").getDouble(Double.NaN);
+  }
+
+  public boolean hasTarget(){
+    return nt.getEntry("hasTarget").getBoolean(false);
   }
 
   @Override

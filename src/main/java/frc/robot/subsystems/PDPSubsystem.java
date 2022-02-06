@@ -87,7 +87,7 @@ public class PDPSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("voltaj", getVoltage());
     SmartDashboard.putNumber("toplam akim", getTotalCurrent());
-    SmartDashboard.putNumber("toplam güç", getTotalPower());
+    SmartDashboard.putNumber("toplam guc", getTotalPower());
     SmartDashboard.putNumber("toplam enerji", getTotalEnergy());
     SmartDashboard.putNumber("sicaklik", getTemperature());
     SmartDashboard.putNumber("shooter akim", getVictorShooter());

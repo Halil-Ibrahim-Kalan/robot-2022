@@ -9,11 +9,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Auto.AutoClimb;
 import frc.robot.commands.Drive.JoystickDriveCommand;
 import frc.robot.commands.Funnel.FunnelCommand;
-import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeGroupCommand;
 import frc.robot.commands.Shooter.ShooterCommand;
+import frc.robot.commands.Turret.TurretCommand;
+import frc.robot.commands.Turret.TurretReset;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.FunnelSubsystem;
@@ -42,7 +45,7 @@ public class RobotContainer {
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
   public final PDPSubsystem m_pdp = new PDPSubsystem();
   public final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  public final TurretSubsystem m_turrer = new TurretSubsystem();
+  public final TurretSubsystem m_turret = new TurretSubsystem();
   public final VisionSubsystem m_vision = new VisionSubsystem();
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -60,21 +63,26 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Top Alma, Taşıma
-    new JoystickButton(m_driverController, 6).whileHeld(new IntakeGroupCommand(m_intake, m_funnel));
-
-    // Top Geri Taşıma
-    new JoystickButton(m_driverController, 5).whileHeld(new FunnelCommand(m_funnel, 0.8));
-
-    // Top Alma PANEL
-    new JoystickButton(m_operatorController, 1).whileHeld(new IntakeCommand(m_intake, 0.4));
-    new JoystickButton(m_operatorController, 8).whileHeld(new IntakeCommand(m_intake, -0.4));
+    new JoystickButton(m_driverController, 5).whileHeld(new IntakeGroupCommand(m_intake, m_funnel));
 
     // Top Taşıma
-    new JoystickButton(m_operatorController, 10).whileHeld(new FunnelCommand(m_funnel, 0.4));
-    new JoystickButton(m_operatorController, 9).whileHeld(new FunnelCommand(m_funnel, -0.4));
+    new JoystickButton(m_driverController, 4).whileHeld(new FunnelCommand(m_funnel, 1));
+    
+    // Top Atma
+    new JoystickButton(m_driverController, 2).whileHeld(new ShooterCommand(m_shooter, 1));
 
-    // Top Fırlatma Manuel
-    new JoystickButton(m_operatorController, 12).whileHeld(new ShooterCommand(m_shooter,-1));
+    // Tırman
+    new JoystickButton(m_driverController, 3).whileHeld(new AutoClimb(m_climb));
+
+    // Top Taşıma
+    new JoystickButton(m_driverController, 1).whileHeld(new FunnelCommand(m_funnel, -1));
+
+    // Turret Reset
+    new JoystickButton(m_driverController, 7).whenPressed(new TurretReset(m_turret));
+    
+    // Turret Kontrol
+    new POVButton(m_driverController, 270).whileHeld(new TurretCommand(m_turret, 1));
+    new POVButton(m_driverController, 90).whileHeld(new TurretCommand(m_turret, -1));
   }
 
   /**

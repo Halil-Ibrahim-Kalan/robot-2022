@@ -52,7 +52,7 @@ public final class Constants {
 
     // Funnel
     public static final class FunnelConstants{
-        public static final int deviceID = 1;
+        public static final int deviceID = 7;
         public static final boolean InvertedMode = true;
     }
 
@@ -71,11 +71,10 @@ public final class Constants {
             public static final byte channelA = 0;
             public static final byte channelB = 1;
             public static final boolean reverseDirection = false;
-            public static final int kPPR = 20; // Devir başına gerekli darbe sayısı 
-            public static final int kSF = 4; // Ölçek faktörü
-            public static final double kMotorShaft = 15; // motor milinin çapı(cm) veya çarkın çapı | cim - 8 mm
-            public double cpr = 64; //if am-4027
-            public double whd = 6; // for 6 inch wheel
+            public static final double motorWheel = 3 / 2.54; //  (1 inch 2.54cm)
+            public static final double turretWheel = 35 / 2.54;
+            public static final double cpr = 5; //if am-3314a
+
         }
     }
 }
