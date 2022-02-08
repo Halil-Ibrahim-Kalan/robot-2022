@@ -37,7 +37,7 @@ public class VisionSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Koordinat:X", getX());
-    SmartDashboard.putNumber("Koordinat:Y", getY());
+    SmartDashboard.putNumber("X Coordinate", getX());
+    SmartDashboard.putNumber("Y Coordinate", getY());
   }
 }

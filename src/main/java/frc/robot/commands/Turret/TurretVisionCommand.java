@@ -12,11 +12,7 @@ public class TurretVisionCommand extends CommandBase {
   /** Creates a new TurretVisionCommand. */
   private final TurretSubsystem m_turret;
   private final VisionSubsystem m_vision;
-  double error;
-  double yaw;
-  double goal;
-  int accuracy;
-  double x;
+  private double error;
   public TurretVisionCommand(TurretSubsystem turret, VisionSubsystem vision) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_turret = turret; 
@@ -32,12 +28,8 @@ public class TurretVisionCommand extends CommandBase {
   @Override
   public void execute() {
     error = m_vision.getX();
-    if(error < 0) m_turret.runTurret(0.19);
-    else if(error > 0)  m_turret.runTurret(-0.19);
-    if(error >= -2 && error <= 2){
-      m_turret.runTurret(0);
-    }
-  
+    if(error < 0) m_turret.runTurret(0.3);
+    else if(error > 0)  m_turret.runTurret(-0.3);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +41,6 @@ public class TurretVisionCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (m_vision.hasTarget() && error >= -2 && error <= 2);
+    return (m_vision.hasTarget());
   }
 }

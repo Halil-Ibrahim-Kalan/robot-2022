@@ -10,18 +10,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PDPSubsystem extends SubsystemBase {
   /** Creates a new PDPSubsystem. */
-  PowerDistribution examplePD;
-  double voltage;
-  double current;
-  double power;
-  double energy;
-  double temp;
-  double shooter;
-  double turret;
-  double funnel;
-  double intake;
-  double climb1;
-  double climb2;
+  private PowerDistribution examplePD;
+  private double voltage;
+  private double current;
+  private double power;
+  private double energy;
+  private double temp;
+  private double shooter;
+  private double turret;
+  private double funnel;
+  private double intake;
+  private double climb1;
+  private double climb2;
 
   public PDPSubsystem() {
     examplePD = new PowerDistribution();
@@ -85,16 +85,16 @@ public class PDPSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("voltaj", getVoltage());
-    SmartDashboard.putNumber("toplam akim", getTotalCurrent());
-    SmartDashboard.putNumber("toplam guc", getTotalPower());
-    SmartDashboard.putNumber("toplam enerji", getTotalEnergy());
-    SmartDashboard.putNumber("sicaklik", getTemperature());
-    SmartDashboard.putNumber("shooter akim", getVictorShooter());
-    SmartDashboard.putNumber("turret akim", getVictorTurret());
-    SmartDashboard.putNumber("funnel akim", getVictorFunnel());
-    SmartDashboard.putNumber("intake akim", getVictorIntake());
-    SmartDashboard.putNumber("climb2 akim", getVictorClimb2());
-    SmartDashboard.putNumber("climb1 akim", getVictorClimb());
+    SmartDashboard.putNumber("voltage", getVoltage());
+    SmartDashboard.putNumber("total current", getTotalCurrent());
+    SmartDashboard.putNumber("total power", getTotalPower());
+    SmartDashboard.putNumber("total energy", getTotalEnergy());
+    SmartDashboard.putNumber("temperature", getTemperature());
+    SmartDashboard.putNumber("shooter current", getVictorShooter());
+    SmartDashboard.putNumber("turret current", getVictorTurret());
+    SmartDashboard.putNumber("funnel current", getVictorFunnel());
+    SmartDashboard.putNumber("intake current", getVictorIntake());
+    SmartDashboard.putNumber("climb2 current", getVictorClimb2());
+    SmartDashboard.putNumber("climb1 current", getVictorClimb());
   }
 }

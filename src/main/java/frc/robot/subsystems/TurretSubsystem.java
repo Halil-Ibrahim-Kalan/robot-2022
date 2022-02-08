@@ -41,6 +41,5 @@ public class TurretSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Turret Encoder", getDistanceTraveled());
-    SmartDashboard.putNumber("TurretValue", motor.getMotorOutputPercent());
   }
 }

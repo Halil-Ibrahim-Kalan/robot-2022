@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.Constants.FunnelConstants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class FunnelSubsystem extends SubsystemBase {
@@ -25,7 +24,5 @@ public class FunnelSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Funnel Voltaj", motor.getBusVoltage());
-    SmartDashboard.putNumber("Funnel Motor Speed", motor.getMotorOutputPercent());
   }
 }

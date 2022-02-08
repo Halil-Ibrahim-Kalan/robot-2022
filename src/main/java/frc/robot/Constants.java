@@ -52,7 +52,7 @@ public final class Constants {
 
     // Funnel
     public static final class FunnelConstants{
-        public static final int deviceID = 7;
+        public static final int deviceID = 1;
         public static final boolean InvertedMode = true;
     }
 
@@ -64,7 +64,7 @@ public final class Constants {
 
     // Turret
     public static final class TurretConstants{
-        public static final int deviceID = 3;
+        public static final int deviceID = 7;
         public static final boolean InvertedMode = true;
         
         public static final class Encoder{
