@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 
-public class TurretVisionCommand extends CommandBase {
-  /** Creates a new TurretVisionCommand. */
+public class AutoMiddleCommand extends CommandBase {
+  /** Creates a new AutoMiddleCommand. */
   private final TurretSubsystem m_turret;
   private final VisionSubsystem m_vision;
-  private double head;
-  private double count;
+  private double error;
   private boolean IsFinished=false;
-  public TurretVisionCommand(TurretSubsystem turret, VisionSubsystem vision) {
+  public AutoMiddleCommand(TurretSubsystem turret, VisionSubsystem vision) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_turret = turret; 
     this.m_vision = vision;
@@ -24,46 +23,31 @@ public class TurretVisionCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    head=m_turret.getDistanceTraveled();
-    count=1;
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!(m_vision.hasTarget()) && count==1){
-      while (m_turret.getDistanceTraveled()<=head+90){
-        m_turret.runTurret(-0.8);
-        if (m_vision.hasTarget()){
-          break;
-        }
+    if (!(m_vision.hasTarget())){
+      error = m_vision.getX();
+      if(error != 0){
+        m_turret.runTurret(-(error/16));
+        IsFinished = false;
       }
-      while (m_turret.getDistanceTraveled()>=head-90){
-        m_turret.runTurret(0.8);
-        if (m_vision.hasTarget()){
-          break;
-        }
+      else{
+        m_turret.runTurret(0);
+        IsFinished = true;
       }
-      while (m_turret.getDistanceTraveled()<=head){
-        m_turret.runTurret(-0.8);
-        if (m_vision.hasTarget()){
-          break;
-        }
-      }
-      count++;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.runTurret(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (IsFinished);
+    return IsFinished;
   }
 }
