@@ -6,48 +6,44 @@ package frc.robot.commands.Turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
 
-public class TurretVisionCommand extends CommandBase {
-  /** Creates a new TurretVisionCommand. */
+public class autoturret extends CommandBase {
+  /** Creates a new autoturret. */
   private final TurretSubsystem m_turret;
-  private final VisionSubsystem m_vision;
-  private double error;
-  private boolean IsFinished=false;
-  public TurretVisionCommand(TurretSubsystem turret, VisionSubsystem vision) {
+  private final double m_speed;
+  private boolean IsFinished = false;
+
+  public autoturret(TurretSubsystem turret, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_turret = turret; 
-    this.m_vision = vision;
-    addRequirements(m_turret,m_vision);
+    m_turret = turret;
+    m_speed = speed;
+    addRequirements(m_turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_turret.resetEncoder();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error = m_vision.getX();
-    if(error != 0){
-      m_turret.runTurret(-(error/16));
-      IsFinished = false;
+    if (m_turret.getDistanceTraveled() < 10) {
+      m_turret.runTurret(m_speed);
     }
-    else{
-      m_turret.runTurret(0);
-      IsFinished = true;
+    else {
+      IsFinished=true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.runTurret(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (!(m_vision.hasTarget()) || IsFinished);
+    return IsFinished;
   }
 }

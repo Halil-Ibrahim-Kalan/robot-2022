@@ -74,7 +74,6 @@ public final class Constants {
             public static final double motorWheel = 3 / 2.54; //  (1 inch 2.54cm)
             public static final double turretWheel = 35 / 2.54;
             public static final double cpr = 5; //if am-3314a
-
         }
     }
 }
