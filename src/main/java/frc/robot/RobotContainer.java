@@ -15,6 +15,7 @@ import frc.robot.commands.Drive.JoystickDriveCommand;
 import frc.robot.commands.Funnel.FunnelCommand;
 import frc.robot.commands.Intake.IntakeGroupCommand;
 import frc.robot.commands.Shooter.ShooterCommand;
+import frc.robot.commands.Turret.AutoMiddleCommand;
 import frc.robot.commands.Turret.TurretCommand;
 import frc.robot.commands.Turret.TurretReset;
 import frc.robot.commands.Turret.TurretVisionCommand;
@@ -80,6 +81,10 @@ public class RobotContainer {
     
     // Turret Auto
     new JoystickButton(m_driverController, 3).whenPressed(new TurretVisionCommand(m_turret, m_vision));
+    
+    // Turret Ortala
+    new JoystickButton(m_operatorController, 1).whileHeld(new AutoMiddleCommand(m_turret, m_vision,false));
+    new JoystickButton(m_operatorController, 1).whenInactive(new AutoMiddleCommand(m_turret, m_vision,true));
     
     // Turret Kontrol
     new POVButton(m_driverController, 270).whileHeld(new TurretCommand(m_turret, 1));

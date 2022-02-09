@@ -14,8 +14,10 @@ public class AutoMiddleCommand extends CommandBase {
   private final VisionSubsystem m_vision;
   private double error;
   private boolean IsFinished=false;
-  public AutoMiddleCommand(TurretSubsystem turret, VisionSubsystem vision) {
+  private boolean m_bool;
+  public AutoMiddleCommand(TurretSubsystem turret, VisionSubsystem vision, boolean bool) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_bool=bool;
     this.m_turret = turret; 
     this.m_vision = vision;
     addRequirements(m_turret,m_vision);
@@ -28,7 +30,7 @@ public class AutoMiddleCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!(m_vision.hasTarget())){
+    if(!m_bool){
       error = m_vision.getX();
       if(error != 0){
         m_turret.runTurret(-(error/16));
@@ -39,11 +41,27 @@ public class AutoMiddleCommand extends CommandBase {
         IsFinished = true;
       }
     }
+    else {
+      if (m_turret.getDistanceTraveled()<0){
+        while (m_turret.getDistanceTraveled()<0){
+          m_turret.runTurret(-0.8);
+        }
+        IsFinished=true;
+      }
+      else if (m_turret.getDistanceTraveled()>0){
+        while (m_turret.getDistanceTraveled()>0){
+          m_turret.runTurret(0.8);
+        }
+        IsFinished=true;
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_turret.runTurret(0);
+  }
 
   // Returns true when the command should end.
   @Override
