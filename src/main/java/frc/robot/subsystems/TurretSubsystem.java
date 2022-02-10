@@ -24,6 +24,8 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void runTurret(double speed) {
+    // -1 saat yönünde
+    // +1 saat yönünün tersinde
     motor.set(VictorSPXControlMode.PercentOutput, speed);
   }
 

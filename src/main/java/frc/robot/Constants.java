@@ -50,6 +50,15 @@ public final class Constants {
         public static final boolean InvertedMode = true;
     }
 
+    // LED
+    public static final class LEDConstants{
+        public static final int PWMPort = 2;
+        public static final int LEDBuffer = 60;
+        public static final int Red = 0;
+        public static final int Green = 255;
+        public static final int Blue = 0;
+    }
+
     // Funnel
     public static final class FunnelConstants{
         public static final int deviceID = 1;

@@ -10,16 +10,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Auto.AutoTurret;
 import frc.robot.commands.Auto.Autonomous;
 import frc.robot.commands.Drive.JoystickDriveCommand;
 import frc.robot.commands.Funnel.FunnelCommand;
 import frc.robot.commands.Intake.IntakeGroupCommand;
 import frc.robot.commands.Shooter.ShooterCommand;
-import frc.robot.commands.Turret.AutoMiddleCommand;
 import frc.robot.commands.Turret.TurretCommand;
-import frc.robot.commands.Turret.TurretReset;
-import frc.robot.commands.Turret.TurretVisionCommand;
-// import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.FunnelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -42,7 +40,7 @@ public class RobotContainer {
   public Joystick m_operatorController = new Joystick(Constants.JoystickConstants.Panel);
   
   //Subsystem
-  // public final ClimbSubsystem m_climb = new ClimbSubsystem();
+  public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final FunnelSubsystem m_funnel = new FunnelSubsystem();
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
   public final PDPSubsystem m_pdp = new PDPSubsystem();
@@ -77,14 +75,10 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 1).whileHeld(new FunnelCommand(m_funnel, -1));
 
     // Turret Reset
-    new JoystickButton(m_driverController, 7).whenPressed(new TurretReset(m_turret));
+    new JoystickButton(m_driverController, 7).whenPressed(() -> m_turret.resetEncoder());
     
     // Turret Auto
-    new JoystickButton(m_driverController, 3).whenPressed(new TurretVisionCommand(m_turret, m_vision));
-    
-    // Turret Ortala
-    new JoystickButton(m_operatorController, 1).whileHeld(new AutoMiddleCommand(m_turret, m_vision,false));
-    new JoystickButton(m_operatorController, 1).whenInactive(new AutoMiddleCommand(m_turret, m_vision,true));
+    new JoystickButton(m_driverController, 3).whenPressed(new AutoTurret(m_turret, m_vision));
     
     // Turret Kontrol
     new POVButton(m_driverController, 270).whileHeld(new TurretCommand(m_turret, 1));

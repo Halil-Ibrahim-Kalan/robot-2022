@@ -19,6 +19,8 @@ public class Autonomous extends SequentialCommandGroup {
   public Autonomous(DriveSubsystem drive, FunnelSubsystem funnel, ShooterSubsystem shooter, TurretSubsystem turret, VisionSubsystem vision) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new AutoTurret(turret, vision)
+    );
   }
 }
